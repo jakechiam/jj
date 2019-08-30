@@ -85,3 +85,13 @@ button:hover, button:focus, .offsite-is-open button {
 .nav a:hover, .nav a:focus, .nav a:active {
   color: var(--menuTextHoverColor);
 }
+
+/**
+ *  Sidebar Menu CSS toggle
+ * -----------
+ */
+
+ .offsite-is-open .offsite-container,
+ .offsite-is-open .site-container {
+   transform: translateX(14rem);
+ }
