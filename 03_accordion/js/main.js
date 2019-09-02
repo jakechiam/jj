@@ -1,8 +1,11 @@
-const container = document.querySelector('.accordion-container')
-container.addEventListener('click', e => {
-  const header = e.target.closest('.accordion__header')
-  if (!header) return
+// Chapter 4: Iterating through Each of the 4 Accordions, (using a forEach loop)
+// forEach Accordion: add a click event listener(with a callback that toggles .is-open in parent Accordion)
 
-  const accordion = header.parentElement
-  accordion.classList.toggle('is-open')
+const accordionsArr = Array.from(document.querySelectorAll('.accordion'))
+
+accordionsArr.forEach(iAccordion => {
+  const iAccordionHeader = iAccordion.querySelector('.accordion__header')
+  iAccordionHeader.addEventListener('click', evt => {
+    iAccordion.classList.toggle('is-open')
+  })
 })
