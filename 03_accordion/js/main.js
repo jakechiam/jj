@@ -1,11 +1,14 @@
-// Chapter 4: Iterating through Each of the 4 Accordions, (using a forEach loop)
-// forEach Accordion: add a click event listener(with a callback that toggles .is-open in parent Accordion)
+// Chapter 6: Event Delegation
+// Attach JUST ONE click eventListener to PARENT accordionContainer, that catches all events bubblingUp
+// On ONE click eventListener, check if event delegation bubbleUps to inner accordion-header
+//   IF yes, then get parentElement of accordion-header, and toggle its 'is-open' class
 
-const accordionsArr = Array.from(document.querySelectorAll('.accordion'))
+const accordionContainer = document.querySelector('.accordion-container')
 
-accordionsArr.forEach(iAccordion => {
-  const iAccordionHeader = iAccordion.querySelector('.accordion__header')
-  iAccordionHeader.addEventListener('click', evt => {
-    iAccordion.classList.toggle('is-open')
-  })
+accordionContainer.addEventListener('click', e => {
+  const accordionHeader = e.target.closest('.accordion__header')
+  if (accordionHeader) {
+    const accordion = accordionHeader.parentElement
+    accordion.classList.toggle('is-open')
+  }
 })
