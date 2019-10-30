@@ -7,32 +7,29 @@ const accordionContainer = document.querySelector('.accordion-container')
 
 accordionContainer.addEventListener('click', e => {
   const accordionHeader = e.target.closest('.accordion__header')
-  if (accordionHeader) {
-    const accordion = accordionHeader.parentElement
-    const accordionContent = accordionHeader.nextElementSibling
-    const accordionInner = accordionContent.children[0]
+  if (!accordionHeader) return // ! click was from accordion__content >> DoNothing
+  // else clickEvent was fired by accordionHeader or her children
+  const accordion = accordionHeader.parentElement
+  const accordionContent = accordionHeader.nextElementSibling
+  const accordionInner = accordionContent.children[0]
 
-    let height
+  const height = accordion.classList.contains('is-open')
+    ? 0
+    : accordionInner.getBoundingClientRect().height
 
-    if (accordion.classList.contains('is-open')) {
-      height = 0
-    } else {
-      height = accordionInner.getBoundingClientRect().height
-    }
+  accordion.classList.toggle('is-open')
+  accordionContent.style.height = `${height}px`
 
-    accordion.classList.toggle('is-open')
-    accordionContent.style.height = height + 'px'
-
-    /* J: Tweak to Enable ONLY ONE accordion tab to be open at any one time */
-    // const accordionsArr = Array.from(accordionContainer.children)
-    // accordionsArr.forEach(acc => {
-    //   if (acc === accordion) {
-    //     accordion.classList.toggle('is-open')
-    //     accordionContent.style.height = height + 'px'
-    //   } else {
-    //     acc.classList.remove('is-open')
-    //     acc.querySelector('.accordion__content').style.height = 0 + 'px'
-    //   }
-    // })
-  }
+  /* J: Tweak to Enable ONLY ONE accordion tab to be open at any one time */
+  // const accordionsArr = Array.from(accordionContainer.children)
+  // accordionsArr.forEach(acc => {
+  //   if (acc === accordion) {
+  //     accordion.classList.toggle('is-open')
+  //     accordionContent.style.height = height + 'px'
+  //   } else {
+  //     acc.classList.remove('is-open')
+  //     acc.querySelector('.accordion__content').style.height = 0 + 'px'
+  //   }
+  // })
+  
 })
